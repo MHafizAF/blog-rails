@@ -44,7 +44,11 @@ class PostsController < ApplicationController
   private 
 
   def set_post
-    @post = Post.find(params[:id])
+    begin
+      @post = Post.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+    end
   end
 
   def post_params 
