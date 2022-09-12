@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :posts
-  resources :comments
+
+  get 'comments/:id', to: "comments#new"
+  delete 'comments/:id', to: "comments#destroy", as: :destroy_comment
+  resources :comments, only: [:create, :edit, :update]
 end

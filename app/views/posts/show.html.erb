@@ -5,8 +5,12 @@
   </div>
     <div class="card-body">
       <p> <%= @post.body %> </p>
-      <%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary" %>
-      <%= link_to "Comment", new_comment_path(@post), class: "btn btn-primary" %>
+      <% if user_signed_in? %>
+        <% if @post.user_id == current_user.id %>
+            <%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary" %>
+            <%= link_to "Comment", comment_path(@post), class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
     </div>
   <div class="card-footer"> <%= time_ago_in_words(@post.created_at) %> </div>
 </div>
@@ -15,11 +19,18 @@
 <% @comments.each do |comment| %>
   <div class="card mt-2">
     <div class="card-header">
-      <h2><%= comment.comment %></h2>
+      <%= comment.user.email %> - <%= time_ago_in_words(comment.created_at) %>
     </div>
     <div class="card-body">
-
+      <%= comment.comment %>
     </div>
-    <div class="card-footer"> <%= time_ago_in_words(@post.created_at) %> </div>
+    <div class="card-footer"> 
+      <% if user_signed_in? %>
+        <% if comment.user_id == current_user.id %>
+          <%= link_to "Edit", edit_comment_path(comment), class: "btn btn-primary" %>
+          <%= link_to 'Delete', destroy_comment_path(comment), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 <% end %>
