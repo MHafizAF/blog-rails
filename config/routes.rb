@@ -7,9 +7,10 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-  resources :posts
+  delete "posts/:id", to: "posts#destroy", as: :destroy_post
+  resources :posts, only: [:new, :show, :update, :create, :edit] 
 
-  get 'comments/:id', to: "comments#new"
-  delete 'comments/:id', to: "comments#destroy", as: :destroy_comment
+  get "comments/:id", to: "comments#new"
+  delete "comments/:id", to: "comments#destroy", as: :destroy_comment
   resources :comments, only: [:create, :edit, :update]
 end

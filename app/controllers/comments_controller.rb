@@ -15,6 +15,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit 
+  end
+
+  def update
+    if @comment.update(comment_params)
+      redirect_to post_url(@comment.post_id)
+    else
+      render :edit, status: :unprocessable_entity
+    end 
+  end
+
   def destroy 
     @comment.destroy 
 
