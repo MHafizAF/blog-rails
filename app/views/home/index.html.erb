@@ -1,0 +1,15 @@
+<% @posts.each do |post| %>
+  <div class="card mt-5">
+    <div class="card-header">
+      <h2><%= post.title %></h2>
+    </div>
+    <div class="card-body">
+      <p> <%= post.body %> </p>
+      <%= link_to "Read more...", post, class: "btn btn-primary" %>
+      <% if post.user_id == current_user.id %>
+        <%= link_to "Edit", edit_post_path(post), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+    <div class="card-footer"> <%= time_ago_in_words(post.created_at) %> </div>
+  </div>
+<% end %>
