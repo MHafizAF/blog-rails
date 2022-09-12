@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index 
-    @posts = User.posts.all 
+    user = User.find(current_user.id)
+    @posts = user.posts.all 
   end
 
   def show
@@ -36,7 +37,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    
+
     redirect_to root_path
   end
 
