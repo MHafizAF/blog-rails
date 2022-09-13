@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_comment, only: [:edit, :update, :destroy]
 
   def new
@@ -29,7 +30,7 @@ class CommentsController < ApplicationController
   def destroy 
     @comment.destroy 
 
-    redirect_to posts_url
+    redirect_to posts_path
   end
 
   private 
