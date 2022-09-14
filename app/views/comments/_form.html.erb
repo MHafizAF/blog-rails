@@ -1,11 +1,9 @@
 <%= form_with(model: comment) do |f| %>
   <% if comment.errors.any? %>
-    <div class="message is-danger">
-      <div class="message-header">
-      <p><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</p>
-      </div>
-
-      <div class="message-body">
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+      <div>
+        <p><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</p>
+        <hr>
         <ul>
           <% comment.errors.each do |error| %>
             <li><%= error.full_message %></li>
