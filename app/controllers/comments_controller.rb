@@ -36,7 +36,11 @@ class CommentsController < ApplicationController
   private 
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    begin
+      @comment = Comment.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
+    end
   end
 
   def comment_params 
