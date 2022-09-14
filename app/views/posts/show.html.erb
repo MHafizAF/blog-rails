@@ -18,7 +18,7 @@
 
 <h2 class="mt-5"> Comments </h2>
 
-<% @comments.each do |comment| %>
+<% @post.comments.each do |comment| %>
   <div class="card mt-2">
     <div class="card-header">
       <%= comment.user.email %> - <%= time_ago_in_words(comment.created_at) %>

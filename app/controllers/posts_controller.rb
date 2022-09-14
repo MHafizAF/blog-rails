@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comments = Comment.joins(:user).where(post_id: params[:id])
   end
 
   def new
