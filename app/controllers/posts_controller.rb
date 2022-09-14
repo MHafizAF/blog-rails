@@ -3,8 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index 
-    user = User.find(current_user.id)
-    @posts = user.posts.all 
+    @posts = Post.where(user_id: current_user.id)
   end
 
   def show
