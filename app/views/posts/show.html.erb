@@ -17,22 +17,25 @@
 </div>
 
 <h2 class="mt-5"> Comments </h2>
-
-<% @post.comments.order('created_at DESC').each do |comment| %>
-  <div class="card mt-2">
-    <div class="card-header">
-      <%= comment.user.email %> - <%= time_ago_in_words(comment.created_at) %>
-    </div>
-    <div class="card-body">
-      <%= comment.comment %>
-    </div>
-    <div class="card-footer"> 
-      <% if user_signed_in? %>
-        <% if comment.user_id == current_user.id %>
-          <%= link_to "Edit", edit_comment_path(comment), class: "btn btn-primary" %>
-          <%= link_to 'Delete', destroy_comment_path(comment), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } %>
+<% if @post.comments.empty? %>
+  <h3 class="text-center text-secondary">Comment is empty</h3>
+<% else %>
+  <% @post.comments.order('created_at DESC').each do |comment| %>
+    <div class="card mt-2">
+      <div class="card-header">
+        <%= comment.user.email %> - <%= time_ago_in_words(comment.created_at) %>
+      </div>
+      <div class="card-body">
+        <%= comment.comment %>
+      </div>
+      <div class="card-footer"> 
+        <% if user_signed_in? %>
+          <% if comment.user_id == current_user.id %>
+            <%= link_to "Edit", edit_comment_path(comment), class: "btn btn-primary" %>
+            <%= link_to 'Delete', destroy_comment_path(comment), class: "btn btn-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure ?" } %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
