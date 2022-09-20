@@ -45,6 +45,9 @@ gem "bootsnap", require: false
 # use devise for authentication 
 gem 'devise', '~> 4.8', '>= 4.8.1' 
 
+# use letter opener
+gem 'letter_opener'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -59,6 +62,12 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Use rspec testing 
+  gem 'rspec-rails'
+
+  # use simple cov
+  gem 'simplecov', require: false, group: :test
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
